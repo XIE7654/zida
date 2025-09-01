@@ -1,0 +1,2 @@
+com.zida.cbec.framework.quartz.config.ZidaQuartzAutoConfiguration
+com.zida.cbec.framework.quartz.config.ZidaAsyncAutoConfiguration

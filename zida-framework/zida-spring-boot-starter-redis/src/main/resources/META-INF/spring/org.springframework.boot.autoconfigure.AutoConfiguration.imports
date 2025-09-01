@@ -1,0 +1,2 @@
+com.zida.cbec.framework.redis.config.ZidaRedisAutoConfiguration
+com.zida.cbec.framework.redis.config.ZidaCacheAutoConfiguration

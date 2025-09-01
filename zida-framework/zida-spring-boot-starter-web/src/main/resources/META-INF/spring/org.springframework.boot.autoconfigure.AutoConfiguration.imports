@@ -1,0 +1,7 @@
+com.zida.cbec.framework.apilog.config.ZidaApiLogAutoConfiguration
+com.zida.cbec.framework.jackson.config.ZidaJacksonAutoConfiguration
+com.zida.cbec.framework.swagger.config.ZidaSwaggerAutoConfiguration
+com.zida.cbec.framework.web.config.ZidaWebAutoConfiguration
+com.zida.cbec.framework.xss.config.ZidaXssAutoConfiguration
+com.zida.cbec.framework.banner.config.ZidaBannerAutoConfiguration
+com.zida.cbec.framework.encrypt.config.ZidaApiEncryptAutoConfiguration

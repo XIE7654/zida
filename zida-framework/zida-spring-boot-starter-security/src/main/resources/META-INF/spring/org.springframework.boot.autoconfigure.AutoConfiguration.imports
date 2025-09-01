@@ -1,0 +1,3 @@
+com.zida.cbec.framework.security.config.ZidaSecurityAutoConfiguration
+com.zida.cbec.framework.security.config.ZidaWebSecurityConfigurerAdapter
+com.zida.cbec.framework.operatelog.config.ZidaOperateLogConfiguration

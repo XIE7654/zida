@@ -1,0 +1,2 @@
+com.zida.cbec.framework.tracer.config.ZidaTracerAutoConfiguration
+com.zida.cbec.framework.tracer.config.ZidaMetricsAutoConfiguration

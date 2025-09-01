@@ -1,0 +1,3 @@
+com.zida.cbec.framework.datasource.config.ZidaDataSourceAutoConfiguration
+com.zida.cbec.framework.mybatis.config.ZidaMybatisAutoConfiguration
+com.zida.cbec.framework.translate.config.ZidaTranslateAutoConfiguration

@@ -1,0 +1,3 @@
+com.zida.cbec.framework.mq.redis.config.ZidaRedisMQProducerAutoConfiguration
+com.zida.cbec.framework.mq.redis.config.ZidaRedisMQConsumerAutoConfiguration
+com.zida.cbec.framework.mq.rabbitmq.config.ZidaRabbitMQAutoConfiguration
