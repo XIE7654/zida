@@ -32,7 +32,19 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- ebay 相关模块。默认注释，保证编译速度 -->
+        <dependency>
+            <groupId>com.zida.cbec</groupId>
+            <artifactId>zida-module-ebay</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
+        <!-- temu 相关模块。默认注释，保证编译速度 -->
+        <dependency>
+            <groupId>com.zida.cbec</groupId>
+            <artifactId>zida-module-temu</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
         <!-- ERP 相关模块。默认注释，保证编译速度 -->
         <dependency>

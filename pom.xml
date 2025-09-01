@@ -17,6 +17,8 @@
         <module>zida-module-infra</module>
         <module>zida-module-erp</module>
         <module>zida-module-ai</module>
+        <module>zida-module-ebay</module>
+        <module>zida-module-temu</module>
     </modules>
 
     <name>${project.artifactId}</name>
