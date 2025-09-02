@@ -1,5 +1,8 @@
 package com.zida.cbec.module.temu.controller.admin.store;
 
+import com.zida.cbec.module.temu.controller.temu.client.TemuClient;
+import com.zida.cbec.module.temu.controller.temu.resp.AccessTokenInfo;
+import com.zida.cbec.module.temu.framework.temu.config.TemuProperties;
 import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -37,6 +40,9 @@ public class TemuStoreController {
 
     @Resource
     private TemuStoreService storeService;
+
+    @Resource
+    private TemuProperties temuProperties;
 
     @PostMapping("/create")
     @Operation(summary = "创建Temu 店铺授权信息")
@@ -101,4 +107,27 @@ public class TemuStoreController {
                         BeanUtils.toBean(list, TemuStoreRespVO.class));
     }
 
+    @PostMapping("/authorize")
+    @Operation(summary = "授权Temu接口")
+    @Parameter(name = "id", description = "店铺编号", required = true, example = "1024")
+    @PreAuthorize("@ss.hasPermission('temu:shop:update')")
+    public CommonResult<AccessTokenInfo> authorizeShop(@RequestParam("id") Long id) {
+        // 获取店铺信息
+        TemuStoreDO store = storeService.getStore(id);
+        System.out.println(store.getAccessToken());
+
+        // 创建TemuClient实例并调用授权接口
+        TemuClient temuClient = new TemuClient(temuProperties, store.getAccessToken());
+
+        // 调用授权接口获取权限信息
+        AccessTokenInfo response = temuClient.auth.getAccessTokenInfo();
+        System.out.println(response);
+        // 检查appSubscribeStatus是否为0，如果是则更新店铺数据
+        if (response.getResult().getAppSubscribeStatus() == 0) {
+            // 调用service层方法更新店铺信息
+            storeService.updateShopByAuthInfo(id, response);
+        }
+
+        return success(response);
+    }
 }

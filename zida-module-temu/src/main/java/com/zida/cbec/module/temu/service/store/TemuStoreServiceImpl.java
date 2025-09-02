@@ -1,11 +1,14 @@
 package com.zida.cbec.module.temu.service.store;
 
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.zida.cbec.module.temu.controller.temu.resp.AccessTokenInfo;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import com.zida.cbec.module.temu.controller.admin.store.vo.*;
 import com.zida.cbec.module.temu.dal.dataobject.store.TemuStoreDO;
@@ -82,4 +85,48 @@ public class TemuStoreServiceImpl implements TemuStoreService {
         return storeMapper.selectPage(pageReqVO);
     }
 
+
+
+    private void validateShopExists(Long id) {
+        if (storeMapper.selectById(id) == null) {
+            throw exception(STORE_NOT_EXISTS);
+        }
+    }
+
+    @Override
+    public void updateShopByAuthInfo(Long id, AccessTokenInfo response) {
+        // 校验存在
+        validateShopExists(id);
+
+        // 创建更新对象
+        // 先从数据库中查询现有对象
+        TemuStoreDO existingShop = storeMapper.selectById(id);
+
+        // 更新需要修改的字段
+        existingShop.setRegionId(response.getResult().getRegionId());
+        existingShop.setMallType(response.getResult().getMallType());
+        existingShop.setMallId(response.getResult().getMallId());
+        existingShop.setExpiredTime(response.getResult().getExpiredTime());
+        existingShop.setApiScopeList(response.getResult().getApiScopeList().toString());
+        existingShop.setAppSubscribeEventCodeList(response.getResult().getAppSubscribeEventCodeList().toString());
+        existingShop.setAuthEventCodeList(response.getResult().getAuthEventCodeList().toString());
+        // 使用本地实际时间作为授权时间
+        existingShop.setAuthTime(LocalDateTime.now());
+        // 更新数据库
+        storeMapper.updateById(existingShop);
+    }
+
+    @Override
+    public List<TemuStoreDO> getShopsByUserId(String creator) {
+        if (creator == null || creator.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // 使用 MyBatis Plus 的 QueryWrapper
+        QueryWrapper<TemuStoreDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("creator", creator);
+        queryWrapper.eq("deleted", 0); // 假设有软删除字段
+
+        return storeMapper.selectList(queryWrapper);
+    }
 }

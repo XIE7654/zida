@@ -1,6 +1,8 @@
 package com.zida.cbec.module.temu.service.store;
 
 import java.util.*;
+
+import com.zida.cbec.module.temu.controller.temu.resp.AccessTokenInfo;
 import jakarta.validation.*;
 import com.zida.cbec.module.temu.controller.admin.store.vo.*;
 import com.zida.cbec.module.temu.dal.dataobject.store.TemuStoreDO;
@@ -59,4 +61,18 @@ public interface TemuStoreService {
      */
     PageResult<TemuStoreDO> getStorePage(TemuStorePageReqVO pageReqVO);
 
+    /**
+     * 根据授权信息更新店铺
+     *
+     * @param id 店铺ID
+     * @param response 授权响应信息
+     */
+    void updateShopByAuthInfo(Long id, AccessTokenInfo response);
+
+    /**
+     * 根据用户ID获取店铺列表
+     * @param creator 用户ID
+     * @return 店铺列表
+     */
+    List<TemuStoreDO> getShopsByUserId(String creator);
 }
