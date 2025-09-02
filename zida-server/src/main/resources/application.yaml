@@ -349,3 +349,26 @@ zida:
       type: redis # 消息总线的类型
 
 debug: false
+
+
+ebay:
+  api:
+    authUrl: https://auth.sandbox.ebay.com/
+    apiUrl: https://api.sandbox.ebay.com/
+    appId:
+    devId:
+    certId:
+    ruName:
+    scopes:
+      - https://api.ebay.com/oauth/api_scope
+      - https://api.ebay.com/oauth/api_scope/buy.order.readonly
+      - https://api.ebay.com/oauth/api_scope/sell.inventory.readonly
+      - https://api.ebay.com/oauth/api_scope/sell.inventory
+      - https://api.ebay.com/oauth/api_scope/sell.fulfillment
+      - https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly
+
+temu:
+  api:
+    apiUrl: https://openapi-b-us.temu.com/openapi/router
+    appKey: 4ebbc9190ae410443d65b4c2faca981f
+    appSecret: 4782d2d827276688bf4758bed55dbdd4bbe79a79
