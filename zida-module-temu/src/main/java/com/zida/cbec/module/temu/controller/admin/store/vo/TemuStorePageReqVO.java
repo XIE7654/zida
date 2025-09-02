@@ -14,10 +14,10 @@ import static com.zida.cbec.framework.common.util.date.DateUtils.FORMAT_YEAR_MON
 public class TemuStorePageReqVO extends PageParam {
 
     @Schema(description = "店铺类型：1-全托管店铺，2-半托管店铺，3-本土店铺", example = "1")
-    private Integer shopType;
+    private Integer storeType;
 
     @Schema(description = "自定义店铺名称", example = "芋艿")
-    private String shopName;
+    private String storeName;
 
     @Schema(description = "产品库存 Token")
     private String productStockToken;
@@ -38,10 +38,10 @@ public class TemuStorePageReqVO extends PageParam {
     private String accessToken;
 
     @Schema(description = "店铺币种，如 CNY、USD(香港主体店铺) 等")
-    private String shopCurrency;
+    private String storeCurrency;
 
     @Schema(description = "店铺站点（本土店铺用，如美国、法国等）")
-    private String shopSite;
+    private String storeSite;
 
     @Schema(description = "授权状态：0-未授权，1-已授权，2-已过期，3-已取消", example = "1")
     private Integer authStatus;

@@ -18,11 +18,11 @@ public class TemuStoreRespVO {
 
     @Schema(description = "店铺类型：1-全托管店铺，2-半托管店铺，3-本土店铺", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("店铺类型：1-全托管店铺，2-半托管店铺，3-本土店铺")
-    private Integer shopType;
+    private Integer storeType;
 
     @Schema(description = "自定义店铺名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
     @ExcelProperty("自定义店铺名称")
-    private String shopName;
+    private String storeName;
 
     @Schema(description = "产品库存 Token")
     @ExcelProperty("产品库存 Token")
@@ -50,11 +50,11 @@ public class TemuStoreRespVO {
 
     @Schema(description = "店铺币种，如 CNY、USD(香港主体店铺) 等")
     @ExcelProperty("店铺币种，如 CNY、USD(香港主体店铺) 等")
-    private String shopCurrency;
+    private String storeCurrency;
 
     @Schema(description = "店铺站点（本土店铺用，如美国、法国等）")
     @ExcelProperty("店铺站点（本土店铺用，如美国、法国等）")
-    private String shopSite;
+    private String storeSite;
 
     @Schema(description = "授权状态：0-未授权，1-已授权，2-已过期，3-已取消", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty("授权状态：0-未授权，1-已授权，2-已过期，3-已取消")
