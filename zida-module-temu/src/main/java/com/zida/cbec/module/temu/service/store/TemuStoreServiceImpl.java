@@ -68,13 +68,6 @@ public class TemuStoreServiceImpl implements TemuStoreService {
         storeMapper.deleteByIds(ids);
         }
 
-
-    private void validateStoreExists(Long id) {
-        if (storeMapper.selectById(id) == null) {
-            throw exception(STORE_NOT_EXISTS);
-        }
-    }
-
     @Override
     public TemuStoreDO getStore(Long id) {
         return storeMapper.selectById(id);
@@ -87,37 +80,37 @@ public class TemuStoreServiceImpl implements TemuStoreService {
 
 
 
-    private void validateShopExists(Long id) {
+    private void validateStoreExists(Long id) {
         if (storeMapper.selectById(id) == null) {
             throw exception(STORE_NOT_EXISTS);
         }
     }
 
     @Override
-    public void updateShopByAuthInfo(Long id, AccessTokenInfo response) {
+    public void updateStoreByAuthInfo(Long id, AccessTokenInfo response) {
         // 校验存在
-        validateShopExists(id);
+        validateStoreExists(id);
 
         // 创建更新对象
         // 先从数据库中查询现有对象
-        TemuStoreDO existingShop = storeMapper.selectById(id);
+        TemuStoreDO existingStore = storeMapper.selectById(id);
 
         // 更新需要修改的字段
-        existingShop.setRegionId(response.getResult().getRegionId());
-        existingShop.setMallType(response.getResult().getMallType());
-        existingShop.setMallId(response.getResult().getMallId());
-        existingShop.setExpiredTime(response.getResult().getExpiredTime());
-        existingShop.setApiScopeList(response.getResult().getApiScopeList().toString());
-        existingShop.setAppSubscribeEventCodeList(response.getResult().getAppSubscribeEventCodeList().toString());
-        existingShop.setAuthEventCodeList(response.getResult().getAuthEventCodeList().toString());
+        existingStore.setRegionId(response.getResult().getRegionId());
+        existingStore.setMallType(response.getResult().getMallType());
+        existingStore.setMallId(response.getResult().getMallId());
+        existingStore.setExpiredTime(response.getResult().getExpiredTime());
+        existingStore.setApiScopeList(response.getResult().getApiScopeList().toString());
+        existingStore.setAppSubscribeEventCodeList(response.getResult().getAppSubscribeEventCodeList().toString());
+        existingStore.setAuthEventCodeList(response.getResult().getAuthEventCodeList().toString());
         // 使用本地实际时间作为授权时间
-        existingShop.setAuthTime(LocalDateTime.now());
+        existingStore.setAuthTime(LocalDateTime.now());
         // 更新数据库
-        storeMapper.updateById(existingShop);
+        storeMapper.updateById(existingStore);
     }
 
     @Override
-    public List<TemuStoreDO> getShopsByUserId(String creator) {
+    public List<TemuStoreDO> getStoresByUserId(String creator) {
         if (creator == null || creator.isEmpty()) {
             return new ArrayList<>();
         }

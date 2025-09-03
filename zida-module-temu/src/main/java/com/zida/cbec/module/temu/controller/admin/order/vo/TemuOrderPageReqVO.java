@@ -14,7 +14,7 @@ import static com.zida.cbec.framework.common.util.date.DateUtils.FORMAT_YEAR_MON
 public class TemuOrderPageReqVO extends PageParam {
 
     @Schema(description = "店铺id", example = "22690")
-    private Long shopId;
+    private Long storeId;
 
     @Schema(description = "订单号")
     private String parentOrderSn;

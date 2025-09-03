@@ -67,12 +67,12 @@ public interface TemuStoreService {
      * @param id 店铺ID
      * @param response 授权响应信息
      */
-    void updateShopByAuthInfo(Long id, AccessTokenInfo response);
+    void updateStoreByAuthInfo(Long id, AccessTokenInfo response);
 
     /**
      * 根据用户ID获取店铺列表
      * @param creator 用户ID
      * @return 店铺列表
      */
-    List<TemuStoreDO> getShopsByUserId(String creator);
+    List<TemuStoreDO> getStoresByUserId(String creator);
 }

@@ -63,7 +63,7 @@ public interface TemuOrderService {
      */
     PageResult<TemuOrderDO> getOrderPage(TemuOrderPageReqVO pageReqVO);
 
-    void syncStoreOrders(Long shopId);
+    void syncStoreOrders(Long storeId);
 
     /**
      * 同步所有店铺订单

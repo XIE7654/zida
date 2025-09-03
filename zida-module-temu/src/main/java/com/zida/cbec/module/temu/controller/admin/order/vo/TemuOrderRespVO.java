@@ -18,7 +18,7 @@ public class TemuOrderRespVO {
 
     @Schema(description = "店铺id", requiredMode = Schema.RequiredMode.REQUIRED, example = "22690")
     @ExcelProperty("店铺id")
-    private Long shopId;
+    private Long storeId;
 
     @Schema(description = "订单号", requiredMode = Schema.RequiredMode.REQUIRED)
     @ExcelProperty("订单号")

@@ -19,7 +19,7 @@ public interface TemuOrderMapper extends BaseMapperX<TemuOrderDO> {
 
     default PageResult<TemuOrderDO> selectPage(TemuOrderPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<TemuOrderDO>()
-                .eqIfPresent(TemuOrderDO::getShopId, reqVO.getShopId())
+                .eqIfPresent(TemuOrderDO::getStoreId, reqVO.getStoreId())
                 .eqIfPresent(TemuOrderDO::getParentOrderSn, reqVO.getParentOrderSn())
                 .eqIfPresent(TemuOrderDO::getParentOrderStatus, reqVO.getParentOrderStatus())
                 .betweenIfPresent(TemuOrderDO::getParentOrderTime, reqVO.getParentOrderTime())

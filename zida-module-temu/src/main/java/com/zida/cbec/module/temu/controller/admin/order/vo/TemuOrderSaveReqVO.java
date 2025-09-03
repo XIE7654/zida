@@ -14,7 +14,7 @@ public class TemuOrderSaveReqVO {
 
     @Schema(description = "店铺id", requiredMode = Schema.RequiredMode.REQUIRED, example = "22690")
     @NotNull(message = "店铺id不能为空")
-    private Long shopId;
+    private Long storeId;
 
     @Schema(description = "订单号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotEmpty(message = "订单号不能为空")

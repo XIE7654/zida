@@ -110,8 +110,8 @@ public class TemuStoreController {
     @PostMapping("/authorize")
     @Operation(summary = "授权Temu接口")
     @Parameter(name = "id", description = "店铺编号", required = true, example = "1024")
-    @PreAuthorize("@ss.hasPermission('temu:shop:update')")
-    public CommonResult<AccessTokenInfo> authorizeShop(@RequestParam("id") Long id) {
+    @PreAuthorize("@ss.hasPermission('temu:store:update')")
+    public CommonResult<AccessTokenInfo> authorizeStore(@RequestParam("id") Long id) {
         // 获取店铺信息
         TemuStoreDO store = storeService.getStore(id);
         System.out.println(store.getAccessToken());
@@ -125,7 +125,7 @@ public class TemuStoreController {
         // 检查appSubscribeStatus是否为0，如果是则更新店铺数据
         if (response.getResult().getAppSubscribeStatus() == 0) {
             // 调用service层方法更新店铺信息
-            storeService.updateShopByAuthInfo(id, response);
+            storeService.updateStoreByAuthInfo(id, response);
         }
 
         return success(response);

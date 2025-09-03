@@ -30,7 +30,7 @@ public class TemuOrderDO extends BaseDO {
     /**
      * 店铺id
      */
-    private Long shopId;
+    private Long storeId;
     /**
      * 订单号
      */

@@ -99,10 +99,10 @@ public class TemuOrderServiceImpl implements TemuOrderService {
     }
 
     @Override
-    public void syncStoreOrders(Long shopId) {
+    public void syncStoreOrders(Long storeId) {
         // 实现订单同步逻辑
         // 1. 获取店铺信息和访问令牌
-        TemuStoreDO store = temuStoreService.getStore(shopId);
+        TemuStoreDO store = temuStoreService.getStore(storeId);
         String accessToken = store.getAccessToken();
         // 2. 调用TEMU API获取订单列表
         try {
@@ -136,7 +136,7 @@ public class TemuOrderServiceImpl implements TemuOrderService {
                 if (response != null && response.isSuccess()) {
                     // 8. 处理订单数据
                     if (response.getResult() != null && response.getResult().getPageItems() != null) {
-                        processOrderData(response.getResult().getPageItems(), shopId);
+                        processOrderData(response.getResult().getPageItems(), storeId);
 
                         // 9. 检查是否还有更多数据
                         int totalItems = response.getResult().getTotalItemNum() != null ? response.getResult().getTotalItemNum() : 0;
@@ -169,20 +169,20 @@ public class TemuOrderServiceImpl implements TemuOrderService {
             System.out.println("当前登录用户ID: " + userId);
 
             // 获取当前用户的所有店铺
-            List<TemuStoreDO> shops = temuStoreService.getShopsByUserId(String.valueOf(userId)); //
+            List<TemuStoreDO> stores = temuStoreService.getStoresByUserId(String.valueOf(userId)); //
 
             int successCount = 0;
             int failCount = 0;
 
             // 遍历所有店铺并同步订单
-            for (TemuStoreDO shop : shops) {
+            for (TemuStoreDO store : stores) {
                 try {
-                    syncStoreOrders(shop.getId());
+                    syncStoreOrders(store.getId());
                     successCount++;
-                    System.out.println("店铺 " + shop.getId() + "(" + shop.getStoreName() + ") 订单同步成功");
+                    System.out.println("店铺 " + store.getId() + "(" + store.getStoreName() + ") 订单同步成功");
                 } catch (Exception e) {
                     // 记录单个店铺同步失败的日志，但继续同步其他店铺
-                    System.err.println("店铺 " + shop.getId() + "(" + shop.getStoreName() + ") 订单同步失败: " + e.getMessage());
+                    System.err.println("店铺 " + store.getId() + "(" + store.getStoreName() + ") 订单同步失败: " + e.getMessage());
                     failCount++;
                 }
             }
@@ -196,16 +196,16 @@ public class TemuOrderServiceImpl implements TemuOrderService {
     /**
      * 处理订单数据
      * @param pageItems 页面订单项列表
-     * @param shopId 店铺ID
+     * @param storeId 店铺ID
      */
-    private void processOrderData(List<OrderList.PageItem> pageItems, Long shopId) {
+    private void processOrderData(List<OrderList.PageItem> pageItems, Long storeId) {
         if (pageItems == null || pageItems.isEmpty()) {
             return;
         }
 
         for (OrderList.PageItem pageItem : pageItems) {
             // 处理父订单（每个PageItem对应一个父订单）
-            TemuOrderDO temuOrderDO = convertToOrderDO(pageItem.getOrderList(), pageItem.getParentOrderMap(), shopId);
+            TemuOrderDO temuOrderDO = convertToOrderDO(pageItem.getOrderList(), pageItem.getParentOrderMap(), storeId);
             saveOrUpdateOrder(temuOrderDO);
         }
     }
@@ -214,14 +214,14 @@ public class TemuOrderServiceImpl implements TemuOrderService {
      * 转换订单数据为DO对象
      * @param orders 子订单信息
      * @param parentOrderMap 父订单信息
-     * @param shopId 店铺ID
+     * @param storeId 店铺ID
      * @return OrderDO对象
      */
     private TemuOrderDO convertToOrderDO(List<OrderList.Order> orders,
                                      OrderList.ParentOrderMap parentOrderMap,
-                                     Long shopId) {
+                                     Long storeId) {
         TemuOrderDO orderDO = new TemuOrderDO();
-        orderDO.setShopId(shopId);
+        orderDO.setStoreId(storeId);
         // 父订单信息（当前OrderDO主要存储父订单信息）
         if (parentOrderMap != null) {
             orderDO.setParentOrderSn(parentOrderMap.getParentOrderSn());
@@ -323,11 +323,11 @@ public class TemuOrderServiceImpl implements TemuOrderService {
             throw new RuntimeException("订单不存在或缺少父订单号");
         }
 
-        Long shopId = order.getShopId(); // 从订单中获取shopId
+        Long storeId = order.getStoreId(); // 从订单中获取storeId
 
         // 获取店铺信息和访问令牌
-        TemuStoreDO shop = temuStoreService.getStore(shopId);
-        String accessToken = shop.getAccessToken();
+        TemuStoreDO store = temuStoreService.getStore(storeId);
+        String accessToken = store.getAccessToken();
         // 创建TemuClient实例
         return new TemuClient(temuProperties, accessToken);
     }
