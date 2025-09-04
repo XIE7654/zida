@@ -5,6 +5,7 @@ import java.util.*;
 import com.zida.cbec.framework.common.pojo.PageResult;
 import com.zida.cbec.framework.mybatis.core.query.LambdaQueryWrapperX;
 import com.zida.cbec.framework.mybatis.core.mapper.BaseMapperX;
+import com.zida.cbec.module.temu.dal.dataobject.order.TemuOrderDO;
 import com.zida.cbec.module.temu.dal.dataobject.productspu.TemuProductSpuDO;
 import org.apache.ibatis.annotations.Mapper;
 import com.zida.cbec.module.temu.controller.admin.productspu.vo.*;
@@ -19,6 +20,7 @@ public interface TemuProductSpuMapper extends BaseMapperX<TemuProductSpuDO> {
 
     default PageResult<TemuProductSpuDO> selectPage(TemuProductSpuPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<TemuProductSpuDO>()
+                .eqIfPresent(TemuProductSpuDO::getStoreId, reqVO.getStoreId())
                 .eqIfPresent(TemuProductSpuDO::getGoodsId, reqVO.getGoodsId())
                 .likeIfPresent(TemuProductSpuDO::getGoodsName, reqVO.getGoodsName())
                 .eqIfPresent(TemuProductSpuDO::getOutGoodsSn, reqVO.getOutGoodsSn())

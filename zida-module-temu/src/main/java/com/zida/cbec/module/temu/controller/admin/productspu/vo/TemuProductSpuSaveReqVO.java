@@ -13,6 +13,10 @@ public class TemuProductSpuSaveReqVO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "27764")
     private Long id;
 
+    @Schema(description = "店铺id", requiredMode = Schema.RequiredMode.REQUIRED, example = "22690")
+    @NotNull(message = "店铺id不能为空")
+    private Long storeId;
+
     @Schema(description = "商品唯一ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "21385")
     @NotNull(message = "商品唯一ID不能为空")
     private Long goodsId;

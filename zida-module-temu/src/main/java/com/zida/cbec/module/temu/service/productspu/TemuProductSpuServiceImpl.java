@@ -217,7 +217,7 @@ public class TemuProductSpuServiceImpl implements TemuProductSpuService {
      */
     private TemuProductSpuDO convertToProductSpuDO(GoodsList.GoodsInfo goodsInfo, Long storeId) {
         TemuProductSpuDO productSpuDO = new TemuProductSpuDO();
-
+        productSpuDO.setStoreId(storeId);
         // 基本信息映射
         productSpuDO.setGoodsId(goodsInfo.getGoodsId());
         productSpuDO.setGoodsName(goodsInfo.getGoodsName());

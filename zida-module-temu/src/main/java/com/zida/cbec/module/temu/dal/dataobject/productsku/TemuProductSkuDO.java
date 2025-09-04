@@ -34,6 +34,10 @@ public class TemuProductSkuDO extends BaseDO {
     @TableId
     private Long id;
     /**
+     * 店铺id
+     */
+    private Long storeId;
+    /**
      * SKU唯一ID
      */
     private Long skuId;

@@ -24,7 +24,7 @@ public class Product extends BaseTemuApi {
      */
     public SkuList getLocalSkuList(Map<String, Object> requestParams) {
         // 构建基础参数
-        Map<String, Object> params = buildBaseParams("temu.local.sku.list.retrieve");
+        Map<String, Object> params = buildBaseParams("bg.local.goods.sku.list.query");
 
         // 添加请求参数
         if (requestParams != null) {

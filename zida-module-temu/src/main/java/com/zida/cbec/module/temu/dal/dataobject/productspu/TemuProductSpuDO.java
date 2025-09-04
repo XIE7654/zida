@@ -28,6 +28,10 @@ public class TemuProductSpuDO extends BaseDO {
     @TableId
     private Long id;
     /**
+     * 店铺id
+     */
+    private Long storeId;
+    /**
      * 商品唯一ID
      */
     private Long goodsId;

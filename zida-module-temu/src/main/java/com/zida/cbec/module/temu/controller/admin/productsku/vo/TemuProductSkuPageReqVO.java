@@ -14,6 +14,9 @@ import static com.zida.cbec.framework.common.util.date.DateUtils.FORMAT_YEAR_MON
 @Data
 public class TemuProductSkuPageReqVO extends PageParam {
 
+    @Schema(description = "店铺id", example = "22690")
+    private Long storeId;
+
     @Schema(description = "SKU唯一ID", example = "2314")
     private Long skuId;
 

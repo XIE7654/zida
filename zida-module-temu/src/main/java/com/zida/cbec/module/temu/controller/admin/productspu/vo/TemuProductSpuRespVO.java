@@ -17,6 +17,10 @@ public class TemuProductSpuRespVO {
     @ExcelProperty("编号")
     private Long id;
 
+    @Schema(description = "店铺id", requiredMode = Schema.RequiredMode.REQUIRED, example = "22690")
+    @ExcelProperty("店铺id")
+    private Long storeId;
+
     @Schema(description = "商品唯一ID", requiredMode = Schema.RequiredMode.REQUIRED, example = "21385")
     @ExcelProperty("商品唯一ID")
     private Long goodsId;

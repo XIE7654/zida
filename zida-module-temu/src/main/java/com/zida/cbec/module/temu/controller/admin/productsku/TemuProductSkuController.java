@@ -101,4 +101,16 @@ public class TemuProductSkuController {
                         BeanUtils.toBean(list, TemuProductSkuRespVO.class));
     }
 
+    @PostMapping("/sync-all")
+    @Operation(summary = "同步所有店铺SKU")
+    @PreAuthorize("@ss.hasPermission('temu:product-sku:update')")
+    public CommonResult<Boolean> syncAllSkus() {
+        try {
+            Boolean result = productSkuService.syncAllStoreSkus();
+            return success(result);
+        } catch (Exception e) {
+            throw new RuntimeException("同步所有店铺SKU失败: " + e.getMessage());
+        }
+    }
+
 }

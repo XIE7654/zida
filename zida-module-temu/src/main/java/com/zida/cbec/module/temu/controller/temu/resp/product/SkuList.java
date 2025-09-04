@@ -16,37 +16,40 @@ public class SkuList {
 
     @Data
     public static class Result {
-        private Pagination pagination;
+        private Integer pageNo;
+        private Long total;
         private List<SkuInfo> skuList;
     }
 
     @Data
-    public static class Pagination {
-        private String nextToken;
-        private String previousToken;
-        private Long total;
-    }
-
-    @Data
     public static class SkuInfo {
-        private String skuId;
-        private String goodsId;
         private String goodsName;
-        private String thumbUrl;
         private String specName;
-        private String outSkuSn;
-        private String outGoodsSn;
-        private Long goodsCreateTime;
-        private Long skuStatusChangeTime;
-        private String skuStatus;
-        private String skuSubStatus;
-        private Integer catType;
-        private String catId;
+        private String thumbUrl;
+        private Long goodsId;
+        private Long skuId;
+        private String skuSn;
+        private Integer stock;
+        private String price;
+        private RetailPrice retailPrice;
+        private Long crtTime;
+        private Integer status4VO;
+        private Integer subStatus4VO;
+        private Integer goodsIsOnSale;
+        private String currency;
+        private String skuStatusChangeTime;
         private VolumeInfo volumeInfo;
         private WeightInfo weightInfo;
+        private Integer skuShowSubStatus4VO;
         private List<SpecInfo> specList;
         private Integer lowTrafficTag;
         private Integer restrictedTrafficTag;
+    }
+
+    @Data
+    public static class RetailPrice {
+        private String amount;
+        private String currency;
     }
 
     @Data
