@@ -59,4 +59,10 @@ public interface TemuProductSpuService {
      */
     PageResult<TemuProductSpuDO> getProductSpuPage(TemuProductSpuPageReqVO pageReqVO);
 
+    /**
+     * 同步所有店铺商品
+     *
+     * @return 同步结果
+     */
+    Boolean syncAllStoreProducts();
 }

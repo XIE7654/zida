@@ -101,4 +101,16 @@ public class TemuProductSpuController {
                         BeanUtils.toBean(list, TemuProductSpuRespVO.class));
     }
 
+    @PostMapping("/sync-all")
+    @Operation(summary = "同步所有店铺商品")
+    @PreAuthorize("@ss.hasPermission('temu:product-spu:update')")
+    public CommonResult<Boolean> syncAllProducts() {
+        try {
+            Boolean result = productSpuService.syncAllStoreProducts();
+            return success(result);
+        } catch (Exception e) {
+            throw new RuntimeException("同步所有店铺商品失败: " + e.getMessage());
+        }
+    }
+
 }

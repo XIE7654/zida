@@ -30,7 +30,7 @@ public class TemuProductSpuPageReqVO extends PageParam {
     private String currency;
 
     @Schema(description = "市场价格", example = "30916")
-    private BigDecimal marketPrice;
+    private Long marketPrice;
 
     @Schema(description = "商品售价", example = "17781")
     private BigDecimal price;

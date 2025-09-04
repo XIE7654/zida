@@ -1,13 +1,9 @@
 package com.zida.cbec.module.temu.dal.dataobject.productspu;
 
 import lombok.*;
-import java.util.*;
+
 import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.LocalDateTime;
+
 import com.baomidou.mybatisplus.annotation.*;
 import com.zida.cbec.framework.mybatis.core.dataobject.BaseDO;
 
@@ -54,7 +50,7 @@ public class TemuProductSpuDO extends BaseDO {
     /**
      * 市场价格
      */
-    private BigDecimal marketPrice;
+    private Long marketPrice;
     /**
      * 商品售价
      */

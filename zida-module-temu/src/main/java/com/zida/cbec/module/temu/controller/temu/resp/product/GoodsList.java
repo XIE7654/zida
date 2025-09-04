@@ -2,6 +2,7 @@ package com.zida.cbec.module.temu.controller.temu.resp.product;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class GoodsList {
         private Long brandId;
         private Long trademarkId;
         private String costTemplateId;
-        private Long shipmentLimitSecond;
+        private Integer shipmentLimitSecond;
         private List<String> outSkuSnList;
         private List<Long> skuIdList;
         private List<SkuInfo> skuInfoList;
@@ -54,7 +55,7 @@ public class GoodsList {
 
     @Data
     public static class PriceInfo {
-        private String amount;
+        private BigDecimal amount;
         private String currency;
     }
 
