@@ -15,4 +15,7 @@ public interface ErrorCodeConstants {
 
     ErrorCode ORDER_NOT_EXISTS = new ErrorCode(1_100_001_000, "Temu订单不存在");
 
+    ErrorCode PRODUCT_SPU_NOT_EXISTS = new ErrorCode(1_100_002_000, "Temu SPU不存在");
+
+    ErrorCode PRODUCT_SKU_NOT_EXISTS = new ErrorCode(1_100_003_000, "Temu SKU明细不存在");
 }
