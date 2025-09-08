@@ -6,6 +6,7 @@ import com.zida.cbec.framework.security.core.util.SecurityFrameworkUtils;
 import com.zida.cbec.module.temu.controller.temu.client.TemuClient;
 import com.zida.cbec.module.temu.controller.temu.resp.product.SkuList;
 import com.zida.cbec.module.temu.dal.dataobject.store.TemuStoreDO;
+import com.zida.cbec.module.temu.framework.factory.TemuClientFactory;
 import com.zida.cbec.module.temu.framework.temu.config.TemuProperties;
 import com.zida.cbec.module.temu.service.store.TemuStoreService;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class TemuProductSkuServiceImpl implements TemuProductSkuService {
     private TemuStoreService temuStoreService;
 
     @Resource
-    private TemuProperties temuProperties;
+    private TemuClientFactory temuClientFactory;
 
     @Override
     public Long createProductSku(TemuProductSkuSaveReqVO createReqVO) {
@@ -135,11 +136,12 @@ public class TemuProductSkuServiceImpl implements TemuProductSkuService {
     public void syncStoreSkus(Long storeId) {
         // 实现SKU同步逻辑
         // 1. 获取店铺信息和访问令牌
-        TemuStoreDO store = temuStoreService.getStore(storeId);
-        String accessToken = store.getAccessToken();
-
-        // 2. 创建TemuClient实例
-        TemuClient temuClient = new TemuClient(temuProperties, accessToken);
+//        TemuStoreDO store = temuStoreService.getStore(storeId);
+//        String accessToken = store.getAccessToken();
+//
+//        // 2. 创建TemuClient实例
+//        TemuClient temuClient = new TemuClient(temuProperties, accessToken);
+        TemuClient temuClient = temuClientFactory.createClient(storeId);
 
         // 3. 设置请求参数
         Map<String, Object> requestParams = new HashMap<>();

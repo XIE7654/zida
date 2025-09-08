@@ -9,6 +9,7 @@ import com.zida.cbec.module.temu.controller.temu.resp.OrderDetail;
 import com.zida.cbec.module.temu.controller.temu.resp.OrderList;
 import com.zida.cbec.module.temu.controller.temu.resp.ShippingInfo;
 import com.zida.cbec.module.temu.dal.dataobject.store.TemuStoreDO;
+import com.zida.cbec.module.temu.framework.factory.TemuClientFactory;
 import com.zida.cbec.module.temu.framework.temu.config.TemuProperties;
 import com.zida.cbec.module.temu.service.store.TemuStoreService;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class TemuOrderServiceImpl implements TemuOrderService {
     private TemuStoreService temuStoreService;
 
     @Resource
-    private TemuProperties temuProperties;
+    private TemuClientFactory temuClientFactory;
 
     @Override
     public Long createOrder(TemuOrderSaveReqVO createReqVO) {
@@ -102,12 +103,13 @@ public class TemuOrderServiceImpl implements TemuOrderService {
     public void syncStoreOrders(Long storeId) {
         // 实现订单同步逻辑
         // 1. 获取店铺信息和访问令牌
-        TemuStoreDO store = temuStoreService.getStore(storeId);
-        String accessToken = store.getAccessToken();
+//        TemuStoreDO store = temuStoreService.getStore(storeId);
+//        String accessToken = store.getAccessToken();
         // 2. 调用TEMU API获取订单列表
         try {
             // 2. 创建TemuClient实例
-            TemuClient temuClient = new TemuClient(temuProperties, accessToken);
+//            TemuClient temuClient = new TemuClient(temuProperties, accessToken);
+            TemuClient temuClient = temuClientFactory.createClient(storeId);
 
             // 3. 计算最近3天的时间范围
             long currentTime = System.currentTimeMillis() / 1000;
@@ -326,10 +328,11 @@ public class TemuOrderServiceImpl implements TemuOrderService {
         Long storeId = order.getStoreId(); // 从订单中获取storeId
 
         // 获取店铺信息和访问令牌
-        TemuStoreDO store = temuStoreService.getStore(storeId);
-        String accessToken = store.getAccessToken();
+//        TemuStoreDO store = temuStoreService.getStore(storeId);
+//        String accessToken = store.getAccessToken();
         // 创建TemuClient实例
-        return new TemuClient(temuProperties, accessToken);
+//        return new TemuClient(temuProperties, accessToken);
+        return temuClientFactory.createClient(storeId);
     }
     /**
      * 获取订单的父订单号
